@@ -1,21 +1,22 @@
 ---
-title: "coup_chines_history"
-author: "Jason Qiang Guo"
+title: "Coups and Rebellions in Chinese History (中国历史上的政变和起义)"
+author: "Jason Qiang Guo, New York University"
 date: "October 19, 2015"
-documentclass: ctexart
 output:
+  html_document: default
   pdf_document:
     fig_caption: yes
     latex_engine: xelatex
-    template: !expr rticles::ctex_template()
-classoption: "hyperref,"
+    template: /Library/Frameworks/R.framework/Versions/3.2/Resources/library/rticles/rmarkdown/templates/ctex/resources/default.latex
+documentclass: ctexart
+classoption: hyperref,
 ---
 
 ```{r, message=FALSE, results='hide', warning=FALSE}
 rm(list=ls())
 library(foreign)
 library(ggplot2)
-setwd("/Users/qiangguo/Documents/NYU/Network Analysis/network/dataset")
+setwd("/Users/qiangguo/Google Drive/Dataset/Chinese_history_dataset")
 ```
 
 ```{r, message=FALSE, results='hide', warning=FALSE}
@@ -78,12 +79,12 @@ event_count_dta$year <- c(seq(from = -161, to = 1911, by = 50),1911)
 
 ```
 
-```{r, warning=FALSE, results='hide'}
-barplot(event_count_dta$coup_imperial_kinsmen, type = "l")
-barplot(event_count_dta$coup_defacto_inherit_elite, col = "red")
-barplot(event_count_dta$coup_other_elite, col = "green")
-barplot(event_count_dta$coup_general, col = "blue")
-barplot(event_count_dta$revolution, col = "pink")
+```{r, echo=FALSE, warning=FALSE, results='hide'}
+barplot(event_count_dta$coup_imperial_kinsmen, col = "grey", xlab = "year", ylab = "number of coups", main = "number of coups by imperial kinsmen every 50 years")
+barplot(event_count_dta$coup_defacto_inherit_elite, col = "grey", xlab = "year", ylab = "number of coups", main = "Coups by elites with pedigree every 50 years")
+barplot(event_count_dta$coup_other_elite, col = "grey")
+barplot(event_count_dta$coup_general, col = "grey")
+barplot(event_count_dta$revolution, col = "grey")
 
 
 ggplot(event_count_dta, aes(x = year, y = coup_imperial_kinsmen)) +
